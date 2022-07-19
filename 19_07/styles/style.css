@@ -31,3 +31,13 @@ p {
     background-color: grey;
     color: red;
 }
+
+.centered a:link {
+    color: hotpink;
+}
+
+.centered a:visited {
+    color: aqua;
+}
+
+.class1 .class2 .class3 {}
