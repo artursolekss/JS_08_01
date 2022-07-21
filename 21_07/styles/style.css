@@ -1,0 +1,32 @@
+.navbar {
+    background-color: blue;
+    width: 100%;
+}
+
+.navelement a {
+    color: whitesmoke;
+    text-decoration: none;
+}
+
+.navelement {
+    border: 1px solid white;
+    padding: 10px;
+}
+
+@media(min-width:500px) {
+    .navbar {
+        display: flex;
+    }
+}
+
+@media(max-width:500px) {
+    .navbar {
+        text-align: center;
+    }
+}
+
+.picture {
+    border: 1px solid black;
+    padding: 10px;
+    width: fit-content;
+}
