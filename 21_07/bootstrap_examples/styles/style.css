@@ -1,0 +1,14 @@
+.container {
+    color: darkblue;
+}
+
+body {
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif
+}
+
+@media (min-width: 1000px) {
+    .container,
+    .container-sm {
+        max-width: 1000px;
+    }
+}
