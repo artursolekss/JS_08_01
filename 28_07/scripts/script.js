@@ -48,7 +48,7 @@ else
     alert("");
 
 let statement3 = false;
-if (statement) {
+if (value == "+") {
     /////
 } else if (statement2) {
     //////
