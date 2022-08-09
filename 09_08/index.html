@@ -9,11 +9,23 @@
 
 <body>
     <div class="container">
-        <label>Name,Last Name</label>
-        <input id="name">
-        <input id="lastname">
-        <button onclick="welcomeUser()">Submit!</button>
+        <div id="inputsection">
+            <label>Name,Last Name</label>
+            <input id="name">
+            <input id="lastname">
+            <button onclick="welcomeUser()">Submit!</button>
+        </div>
         <h1 id="welcome"></h1>
+        <button class="btn" onclick="hideDisplayInputSection(true)">Hide</button>
+        <button class="btn" onclick="hideDisplayInputSection(false)">Display</button>
+        <button class="btn" onclick="changeColor()">Change color</button>
+        <button class="btn" onclick="timer()">Set timer</button>
+        <button class="btn" onclick=" stopCounter()">Stop counter</button>
+        <h2 id="count"></h2>
+        <input hidden id="stopCounter" value="true">
+        <input type="number" id="factorialN">
+        <h1 id="factorialValue"></h1>
+        <button onclick="setFactorial()">Get factorial</button>
     </div>
 </body>
 
