@@ -18,11 +18,20 @@
                 <input id="number1">
             </div>
             <div class="col col-sm-1 vertical">
-                <input hidden id="operationSelected">
-                <button class="btn" onclick="setOperatorSelected(event,'+')">+</button>
-                <button class="btn" onclick="setOperatorSelected(event,'-')">-</button>
-                <button class="btn" onclick="setOperatorSelected(event,'*')">*</button>
-                <button class="btn" onclick="setOperatorSelected(event,'/')">/</button>
+                <select id="operation">
+                    <option value="+">
+                        +
+                    </option>
+                    <option value="-">
+                        -
+                    </option>
+                    <option value="*">
+                        *
+                    </option>
+                    <option value="/">
+                        /
+                    </option>
+                </select>
             </div>
             <div class="col col-sm-2">
                 <input id="number2">
