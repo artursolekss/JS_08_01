@@ -1,5 +1,20 @@
 let stopCount = true;
 
+let a, b;
+
+function populateAB() {
+    a = 2;
+    b = 3;
+}
+
+function event1() {
+    alert(a + b);
+}
+
+function event2() {
+    alert(a - b);
+}
+
 function welcomeUser() {
     const firstname = document.getElementById("name").value;
     const lastname = document.getElementById("lastname").value;
