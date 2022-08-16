@@ -1,23 +1,50 @@
 function filter() {
-    let brandValue = document.getElementById("brandFilter");
-    let colorValue = document.getElementById("colorFilter");
-    let allRows =
-        document.getElementById("tableRows").getElementsByTagName("tr");
+    // let brandValue = document.getElementById("brandFilter");
+    // let colorValue = document.getElementById("colorFilter");
+    // let allRows =
+    //     document.getElementById("tableRows").getElementsByTagName("tr");
 
-    for (let i = 0; i < allRows.length; i++) {
-        let row = allRows[i];
-        let columns = row.getElementsByTagName("td");
-        let rowBrandVal = columns[0].innerText;
-        let rowColorVal = columns[1].innerText;
+    // for (let i = 0; i < allRows.length; i++) {
+    //     let row = allRows[i];
+    //     let columns = row.getElementsByTagName("td");
+    //     let rowBrandVal = columns[0].innerText;
+    //     let rowColorVal = columns[1].innerText;
 
-        if ((brandValue.value === "" ||
-                brandValue.selectedOptions[0].innerText === rowBrandVal) &&
-            (colorValue.value === "" ||
-                colorValue.selectedOptions[0].innerText === rowColorVal))
-            row.hidden = false;
-        else
-            row.hidden = true;
-    }
+    //     if ((brandValue.value === "" ||
+    //             brandValue.selectedOptions[0].innerText === rowBrandVal) &&
+    //         (colorValue.value === "" ||
+    //             colorValue.selectedOptions[0].innerText === rowColorVal))
+    //         row.hidden = false;
+    //     else
+    //         row.hidden = true;
+    // }
+
+    // let brandFilter = $("#brandFilter");
+    // let colorFitler = $("#colorFilter");
+    // let allRows = $("#tableRows tr");
+    // allRows.each(function() {
+    //     if ((brandFilter.val() == "" ||
+    //             this.children[0].innerText == brandFilter.val()) &&
+    //         (colorFitler.val() == "" ||
+    //             this.children[1].innerText == colorFitler.val()))
+    //         this.hidden = false;
+    //     else
+    //         this.hidden = true;
+    // })
+    let brandFilterVal = $("#brandFilter").val();
+    let colorFitlerVal = $("#colorFilter").val();
+    $("#tableRows tr").filter(function() {
+        let display =
+            (brandFilterVal == "" ||
+                this.children[0].innerText == brandFilterVal) &&
+            (colorFitlerVal == "" ||
+                this.children[1].innerText == colorFitlerVal);
+        $(this).toggle(display);
+    });
+
+
+
+
 }
 
 function addNewRow() {
