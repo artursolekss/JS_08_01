@@ -41,34 +41,44 @@ function filter() {
                 this.children[1].innerText == colorFitlerVal);
         $(this).toggle(display);
     });
-
-
-
-
 }
 
 function addNewRow() {
-    let newBrandVal = document.getElementById("newBrand").value;
-    let newColorVal = document.getElementById("newColor").value;
-    let newRowElement = document.createElement("tr");
-    let newBrandColumn = document.createElement("td");
-    newBrandColumn.innerText = newBrandVal;
-    let newColColumn = document.createElement("td");
-    newColColumn.innerText = newColorVal;
-    newRowElement.appendChild(newBrandColumn);
-    newRowElement.appendChild(newColColumn);
-    document.getElementById("tableRows").appendChild(newRowElement);
-    addNewBrandFilter(newBrandVal);
-    addNewColorFilter(newColorVal);
+    let brandVal = $("#newBrand").val();
+    let colVal = $("#newColor").val();
+    let newRow = $("<tr><td>" + brandVal + "</td><td>" +
+            colVal + "</td></tr>")
+        // let newBrandVal = document.getElementById("newBrand").value;
+        // let newColorVal = document.getElementById("newColor").value;
+        // let newRowElement = document.createElement("tr");
+        // let newBrandColumn = document.createElement("td");
+        // newBrandColumn.innerText = newBrandVal;
+        // let newColColumn = document.createElement("td");
+        // newColColumn.innerText = newColorVal;
+        // newRowElement.appendChild(newBrandColumn);
+        // newRowElement.appendChild(newColColumn);
+        // document.getElementById("tableRows").appendChild(newRowElement);
+    $("#tableRows").append(newRow);
+    addNewBrandFilter(brandVal);
+    addNewColorFilter(colVal);
 }
 
 function addNewColorFilter(color) {
     let colorFilter = document.getElementById("colorFilter");
     let allSelectOption =
         colorFilter.getElementsByTagName("option");
-    for (let i = 0; i < allSelectOption.length; i++) //check if the value does not exist already
-        if (allSelectOption[i].innerText === color)
-            return; //no need to add a new brand (go out of the function)
+
+    let element = $("#colorFilter option")[0];
+
+    while ($(element).val() !== undefined) {
+        if ($(element).val() === color)
+            return;
+        element = $(element).next(); //another type of loop
+    }
+
+    // for (let i = 0; i < allSelectOption.length; i++) //check if the value does not exist already
+    //     if (allSelectOption[i].innerText === color)
+    //         return; //no need to add a new brand (go out of the function)
     let newSelectionOption = document.createElement("option");
     newSelectionOption.innerText = color;
     colorFilter.appendChild(newSelectionOption);
@@ -85,5 +95,20 @@ function addNewBrandFilter(brand) {
     newSelectionOption.innerText = brand;
     brandFilter.appendChild(newSelectionOption);
 
-
 }
+
+function addNewListeners() {
+    $("#brandFilter").on("change", filter);
+    $("#colorFilter").on("change", filter);
+
+    let params = {
+        "borderWidth": "20px",
+        "padding": "15px",
+        "margin-left": "30%"
+    };
+
+    $("#phoneTable").on("click", function() {
+        $(this).animate(params, 3000);
+    })
+}
+$(addNewListeners);
