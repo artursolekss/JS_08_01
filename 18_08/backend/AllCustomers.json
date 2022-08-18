@@ -1,0 +1,81 @@
+{
+    "customers": [{
+            "firstname": "Arturs",
+            "lastname": "Olekss",
+            "phone": "24343435",
+            "email": "a.olekss@gmail.com"
+        },
+        {
+            "firstname": "Martins",
+            "lastname": "Egle",
+            "phone": "+37199998888",
+            "email": "berzins@yahho.com"
+        },
+        {
+            "firstname": "Juris",
+            "lastname": "Kalnins",
+            "phone": "+37177779999",
+            "email": "berzins@yahho.com"
+        },
+        {
+            "firstname": "Jack",
+            "lastname": "TestLast",
+            "phone": "213456789",
+            "email": "Jack.TestLast@gmail.com"
+        },
+        {
+            "firstname": "Jack",
+            "lastname": "Sparrow",
+            "phone": "23456746",
+            "email": "Jack.S@gmail.com"
+        },
+        {
+            "firstname": "Kate",
+            "lastname": "Smith",
+            "phone": "243435365",
+            "email": "ks@gmail.com"
+        },
+        {
+            "firstname": "Janis",
+            "lastname": "Smitins",
+            "phone": "243435423",
+            "email": "smit.j@yahoo.com"
+        },
+        {
+            "firstname": "Jack",
+            "lastname": "Sparrow",
+            "phone": "243435423",
+            "email": "smit.jpar@yahoo.com"
+        },
+        {
+            "firstname": "Emma",
+            "lastname": "Smith",
+            "phone": "21232365",
+            "email": "es@gmail.com"
+        },
+        {
+            "firstname": "Jack",
+            "lastname": "Smitins",
+            "phone": "243435423",
+            "email": "smit.j@yahoo.com"
+        },
+        {
+            "firstname": "Will",
+            "lastname": "Sparrow",
+            "phone": "243435423",
+            "email": "ws.jpar@yahoo.com"
+        },
+        {
+            "firstname": "Anna",
+            "lastname": "Dubaku",
+            "phone": "25454534",
+            "email": "ann.dub@gmail.com"
+        },
+        {
+            "firstname": "Valya",
+            "lastname": "Alexia",
+            "phone": "25943534",
+            "email": "val.alex@gmail.com"
+        }
+    ]
+}
