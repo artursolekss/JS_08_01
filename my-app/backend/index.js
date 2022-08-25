@@ -38,8 +38,24 @@ app.post("/add-customer", (req, res) => {
         firstname: req.body.name,
         lastname: req.body.lastname,
         phone: req.body.phone,
-        email: req.body.email
+        email: req.body.email,
+        vip: req.body.vip == "Yes" ? 1 : 0
     };
+
+
+    const sqlQuery = "INSERT INTO customers (firstname,lastname,email,phone,vip) VALUES (?,?,?,?,?)";
+    connection.query(sqlQuery, [newCustomer.firstname, newCustomer.lastname,
+        newCustomer.email, newCustomer.phone, newCustomer.vip
+    ], (error, results) => {
+        if (error)
+            throw error;
+        res.send(JSON.stringify({
+            "status": 200,
+            "error": null,
+            "response": "Customer ID : " + results.insertId + " created!"
+        }))
+    })
+
 
     // fs.readFile('AllCustomers.json', "utf8", (err, data) => {
     //     const customers = JSON.parse(data);
