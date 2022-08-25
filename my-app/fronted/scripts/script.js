@@ -8,6 +8,10 @@ $($.getJSON("http://localhost:5000/get-allCustomer",
 
             const row = document.createElement("tr");
 
+            const id = document.createElement("td");
+            id.innerHTML = customer.id;
+            row.append(id);
+
             const firstName = document.createElement("td");
             firstName.innerHTML = customer.firstname;
             row.append(firstName);

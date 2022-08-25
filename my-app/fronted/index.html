@@ -14,6 +14,7 @@
         <table>
             <thead>
                 <tr>
+                    <th>ID</th>
                     <th>First Name</th>
                     <th>Last Name</th>
                     <th>E-Mail</th>
@@ -28,31 +29,31 @@
             <div class="form-group row">
                 <label for="name" class="col-sm-2 col-form-label">First Name</label>
                 <div class="col-sm-10">
-                    <input type="text" name="name" class="form-control" id="name" placeholder="First Name">
+                    <input type="text" name="name" class="form-control" id="name" placeholder="First Name" required>
                 </div>
             </div>
             <div class="form-group row">
                 <label for="lastname" class="col-sm-2 col-form-label">Last Name</label>
                 <div class="col-sm-10">
-                    <input type="text" class="form-control" id="lastname" name="lastname" placeholder="Last Name">
+                    <input type="text" class="form-control" id="lastname" name="lastname" placeholder="Last Name" required>
                 </div>
             </div>
             <div class="form-group row">
                 <label for="email" class="col-sm-2 col-form-label">E-Mail</label>
                 <div class="col-sm-10">
-                    <input type="text" class="form-control" id="email" name="email" placeholder="email@email.com">
+                    <input type="text" class="form-control" id="email" name="email" placeholder="email@email.com" pattern="[a-zA-Z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}">
                 </div>
             </div>
             <div class="form-group row">
                 <label for="phone" class="col-sm-2 col-form-label">Phone</label>
                 <div class="col-sm-10">
-                    <input type="text" class="form-control" id="phone" name="phone" placeholder="+37128473948">
+                    <input type="text" class="form-control" id="phone" name="phone" placeholder="+37128473948" pattern="\+37[0-2]2[0-9]{7}">
                 </div>
             </div>
             <div class="form-group row">
                 <label for="vip" class="col-sm-2 col-form-label">Vip</label>
                 <div class="col-sm-10">
-                    <input type="text" class="form-control" id="vip" name="vip" placeholder="Yes/No">
+                    <input type="text" class="form-control" id="vip" name="vip" placeholder="Yes/No" pattern="(Yes|No)">
                 </div>
             </div>
             <button class="btn btn-primary">Save</button>
