@@ -23,6 +23,18 @@ connection.connect((error) => {
     console.log("Connected to the database");
 })
 
+app.post("/delete-customer", (req, res) => {
+    const deleteQuery = "DELETE FROM customers WHERE id = ?";
+    connection.query(deleteQuery, [req.body.deleteId], (error, results) => {
+        if (error)
+            throw error;
+        res.send(JSON.stringify({
+            "status": 200,
+            "error": null,
+            "response": "Customer ID : " + req.body.deleteId + " deleted!"
+        }))
+    })
+})
 
 app.get("/get-allCustomer", (req, res) => {
     const sqlQuery = "SELECT * FROM customers";
