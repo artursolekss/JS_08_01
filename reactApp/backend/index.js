@@ -54,7 +54,6 @@ app.post("/add-customer", (req, res) => {
         vip: req.body.vip == "Yes" ? 1 : 0
     };
 
-
     const sqlQuery = "INSERT INTO customers (firstname,lastname,email,phone,vip) VALUES (?,?,?,?,?)";
     connection.query(sqlQuery, [newCustomer.firstname, newCustomer.lastname,
         newCustomer.email, newCustomer.phone, newCustomer.vip
