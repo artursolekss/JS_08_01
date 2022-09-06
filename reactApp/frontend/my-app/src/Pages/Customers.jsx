@@ -4,9 +4,11 @@ import Button from "react-bootstrap/Button";
 function Customers() {
 
     const [customers, setCustomers] = useState([]);
+    const [laodDone, setLoadDone] = useState(false);
 
     useEffect(() => {
-        loadCustomers();
+        if (!laodDone)
+            loadCustomers();
     })
 
     const loadCustomers = () => {
@@ -16,6 +18,7 @@ function Customers() {
         }).then((response) => {
             response.json().then(obj => {
                 setCustomers(obj.response.customers);
+                setLoadDone(true);
             })
         })
     }
@@ -72,7 +75,7 @@ function Customers() {
                                     {customer.phone}
                                 </td>
                                 <td>
-                                    {customer.vip}
+                                    {customer.vip === 1 ? "Yes" : "No"}
                                 </td>
                             </tr>
                         )

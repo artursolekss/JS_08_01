@@ -1,12 +1,13 @@
 const express = require("express");
 const app = express();
-const fs = require("fs");
 const cors = require("cors");
 const bodyParser = require("body-parser");
 app.use(cors());
 app.use(bodyParser.urlencoded({
     extended: true
 }));
+
+app.use(express.json());
 
 const mysql = require('mysql');
 
@@ -51,7 +52,7 @@ app.post("/add-customer", (req, res) => {
         lastname: req.body.lastname,
         phone: req.body.phone,
         email: req.body.email,
-        vip: req.body.vip == "Yes" ? 1 : 0
+        vip: req.body.vip == "Yes" || req.body.vip === true ? 1 : 0
     };
 
     const sqlQuery = "INSERT INTO customers (firstname,lastname,email,phone,vip) VALUES (?,?,?,?,?)";
