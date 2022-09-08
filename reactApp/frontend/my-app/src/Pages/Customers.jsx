@@ -4,10 +4,10 @@ import Button from "react-bootstrap/Button";
 function Customers() {
 
     const [customers, setCustomers] = useState([]);
-    const [laodDone, setLoadDone] = useState(false);
+    const [loadDone, setLoadDone] = useState(false);
 
     useEffect(() => {
-        if (!laodDone)
+        if (!loadDone)
             loadCustomers();
     })
 
