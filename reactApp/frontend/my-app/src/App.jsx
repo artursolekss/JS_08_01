@@ -6,6 +6,7 @@ import NavBar from './NavBar';
 import CreateCustomer from './Pages/CreateCustomer';
 import { useState } from 'react';
 import Login from './Auth/Login';
+import Register from './Auth/Register';
 
 function App() {
 
@@ -27,7 +28,13 @@ function App() {
         </Container>
       }
       {user === null &&
-        <Login></Login>
+        <BrowserRouter>
+          <Routes>
+            <Route index path="/" element={<Login></Login>}></Route>
+            <Route exact path='register' element={<Register />} />
+          </Routes>
+          {/* <Login></Login> */}
+        </BrowserRouter>
       }
     </div>
   );

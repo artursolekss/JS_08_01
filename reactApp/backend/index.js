@@ -1,6 +1,8 @@
 const express = require("express");
 const app = express();
 const cors = require("cors");
+const crypto = require("crypto");
+
 const bodyParser = require("body-parser");
 app.use(cors());
 app.use(bodyParser.urlencoded({
@@ -43,6 +45,51 @@ app.get("/get-allCustomers", (req, res) => {
         if (error)
             throw error;
         res.send(JSON.stringify({ "status": 200, "error": null, "response": { customers: results } }))
+    })
+})
+
+app.post("/login", (req, res) => {
+    const user = {
+        username: req.body.username,
+        password: req.body.pass
+    }
+
+    const sqlQuery = "SELECT * FROM users WHERE username = ?";
+    connection.query(sqlQuery, [user.username], (error, results) => {
+        let userExist = false;
+        if (results[0] !== undefined) {
+            const passhash = results[0].password;
+            const salt = results[0].salt;
+            const hashCal = crypto.pbkdf2Sync(user.password, salt, 1000, 64, 'sha512').toString("hex");
+            userExist = hashCal === passhash;
+        }
+        res.send(JSON.stringify({
+            "status": 200,
+            "error": null,
+            "userExist": userExist
+        }))
+    })
+})
+
+
+app.post("/register", (req, res) => {
+    const user = {
+        username: req.body.username,
+        password: req.body.pass
+    }
+
+    let salt = crypto.randomBytes(16).toString("hex");
+    const hash = crypto.pbkdf2Sync(user.password, salt, 1000, 64, 'sha512').toString("hex");
+
+    const sqlQuery = "INSERT INTO users (username,password,salt) VALUES (?,?,?)";
+    connection.query(sqlQuery, [user.username, hash, salt], (error, results) => {
+        if (error)
+            throw error;
+        res.send(JSON.stringify({
+            "status": 200,
+            "error": null,
+            "response": "User " + user.username + " created!"
+        }))
     })
 })
 
