@@ -15,7 +15,7 @@ export default function Login() {
         if (id === "username") {
             loginNew.username = event.target.value;
         }
-        else if (id == "password") {
+        else if (id === "password") {
             loginNew.pass = event.target.value;
         }
         setLogin(loginNew);
@@ -49,6 +49,7 @@ export default function Login() {
                         User Name
                     </Label>
                     <InputForm id="username" autocomplete="username" value={login.username}
+                        randomAttribute="randomRandom"
                         onChange={(event) => { onChange(event) }} type="text" />
                 </div>
                 <div className="mt-4">

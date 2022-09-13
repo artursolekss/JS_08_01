@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useState } from "react";
 import Button from "react-bootstrap/Button";
-function Customers() {
+const Customers = () => {
 
     const [customers, setCustomers] = useState([]);
     const [loadDone, setLoadDone] = useState(false);
@@ -15,10 +15,11 @@ function Customers() {
 
         fetch("http://localhost:5000/get-allCustomers", {
             method: "GET"
-        }).then((response) => {
-            response.json().then(obj => {
+        }).then(function (response) {
+            response.json().then(function (obj) {
                 setCustomers(obj.response.customers);
                 setLoadDone(true);
+                console.log(this);
             })
         })
     }
