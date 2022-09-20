@@ -5,44 +5,23 @@ const querystring = require('node:querystring');
 const randomstring = require("randomstring");
 const request = require('request');
 const fs = require("fs");
+require('dotenv').config();
 
 const bodyParser = require("body-parser");
-app.use(cors({ origin: ["http://localhost:5000"] }));
+app.use(cors());
 
-app.use(function(req, res, next) {
-
-    // Website you wish to allow to connect
-    res.setHeader('Access-Control-Allow-Origin', 'http://localhost:5000');
-
-    // Request methods you wish to allow
-    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
-
-    // Request headers you wish to allow
-    res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
-
-    // Set to true if you need the website to include cookies in the requests sent
-    // to the API (e.g. in case you use sessions)
-    res.setHeader('Access-Control-Allow-Credentials', true);
-
-    // Pass to next layer of middleware
-    next();
-});
 app.use(bodyParser.urlencoded({
     extended: true
 }));
 
 app.use(express.json());
 
-let client_id; // = '899582c259f64dcebc05e6bb4d83828d';
-const redirect_uri = 'http://localhost:5000/callback';
-let client_secret; // = '677d46bca6664e88b7c9cbd8325c321c';
+const redirect_uri = process.env.DOMAIN_URL + '/callback';
 
-
-// let client_secret, client_id;
 app.get('/login', function(req, res) {
 
-    client_id = req.query.client_id;
-    client_secret = req.query.client_secret;
+    client_id = process.env.CLIENT_ID;
+    client_secret = process.env.CLIENT_SECRET;
     var state = randomstring.generate(16);
     var scope = 'user-read-private user-read-email';
 
@@ -60,6 +39,8 @@ app.get('/callback', function(req, res) {
 
     var code = req.query.code || null;
     var state = req.query.state || null;
+    client_id = process.env.CLIENT_ID;
+    client_secret = process.env.CLIENT_SECRET;
 
     if (state === null) {
         res.redirect('/#' +
@@ -75,14 +56,14 @@ app.get('/callback', function(req, res) {
                 grant_type: 'authorization_code'
             },
             headers: {
-                'Authorization': 'Basic ' + (new Buffer(client_id + ':' + client_secret).toString('base64'))
+                'Authorization': 'Basic ' + (Buffer.from(client_id + ':' + client_secret).toString('base64'))
             },
             json: true
         };
         request.post(authOptions, function(error, response, body) {
             if (!error && response.statusCode === 200) {
                 const access_token = body.access_token;
-                const base_url = "http://localhost:5000";
+                const base_url = process.env.DOMAIN_URL;
                 res.redirect(base_url + "?token=" + access_token);
             }
         });
@@ -90,19 +71,48 @@ app.get('/callback', function(req, res) {
     }
 });
 
-app.get('/', function(req, res) {
-    fs.readFile('../frontend/artistinfo.html', function(err, html) {
-        res.write(html);
+function getHeader() {
+    return fs.promises.readFile("../frontend/header.html", { encoding: "utf8" });
+}
+
+app.get('/', async function(req, res) {
+    const headerHtml = await getHeader();
+    fs.readFile('../frontend/index.html', function(err, html) {
+        res.write(headerHtml + html);
         res.end();
     })
 })
 
-app.get('/script', function(req, res) {
+app.get("/artists", async function(req, res) {
+
+    const headerHtml = await getHeader();
+    fs.readFile('../frontend/artists.html', function(err, html) {
+        res.write(headerHtml + html);
+        res.end();
+    })
+})
+
+app.get('/scripts/script.js', function(req, res) {
     fs.readFile('scripts/script.js', function(err, script) {
         res.write(script);
         res.end();
     })
 })
+
+app.get('/scripts/artists.js', function(req, res) {
+    fs.readFile('scripts/artists.js', function(err, script) {
+        res.write(script);
+        res.end();
+    })
+})
+
+app.get('/styles/style.css', function(req, res) {
+    fs.readFile('styles/style.css', function(err, style) {
+        res.write(style);
+        res.end();
+    })
+})
+
 
 app.listen(5000, () => {
     console.log("Server is running on port 5000");

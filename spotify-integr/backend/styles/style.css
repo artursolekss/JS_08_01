@@ -1,0 +1,4 @@
+.row4items {
+    display: grid;
+    grid-template-columns: repeat(4, 300px);
+}

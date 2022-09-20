@@ -64,20 +64,14 @@ const albumDetails = function(id, token) {
         },
         json: true,
         success: (result) => {
-            console.log(result);
+
         }
     })
 }
 
-
-
-
 //On load
 $(function() {
-    $("#getArtistInfo").on("click", onGetArtist);
-    $("#getAlbumInfo").on("click", onGetAlbum);
-
     const urlParams = new URLSearchParams(window.location.search);
     const tokenVal = urlParams.get("token");
-    $("#token").val(tokenVal);
+    $("#artistsLink").attr("href", "/artists?token=" + tokenVal);
 });
