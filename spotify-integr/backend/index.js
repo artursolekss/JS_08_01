@@ -71,6 +71,47 @@ app.get('/callback', function(req, res) {
     }
 });
 
+app.get("/getArtist", async function(req, res) {
+    const token = req.query.token;
+    const artist = req.query.artist;
+    const requestParam = {
+        url: "https://api.spotify.com/v1/search?q=" + artist + "&type=artist",
+        headers: {
+            'Authorization': 'Bearer ' + token
+        },
+        json: true
+    }
+
+    const artstsResp = await makeRequest(requestParam);
+    return res.send(JSON.stringify(artstsResp));
+})
+
+function makeRequest(requestParam) {
+    return new Promise(function(resolve, reject) {
+        request(requestParam, function(err, resp, body) {
+            if (!err && resp.statusCode === 200) {
+                resolve(body);
+            } else {
+                reject(err);
+            }
+        })
+    })
+}
+
+app.get("/testRequest", async function(req, res) {
+
+    const result = await testPromise();
+    res.send(result);
+})
+
+function testPromise() {
+    return new Promise(function(resolve, reject) {
+        callbackFunction(function(res) {
+            resolve(res);
+        })
+    })
+}
+
 function getHeader() {
     return fs.promises.readFile("../frontend/header.html", { encoding: "utf8" });
 }
@@ -78,9 +119,10 @@ function getHeader() {
 app.get('/', async function(req, res) {
     const headerHtml = await getHeader();
     fs.readFile('../frontend/index.html', function(err, html) {
-        res.write(headerHtml + html);
-        res.end();
-    })
+            res.write(headerHtml + html);
+            res.end();
+        })
+        ///some other
 })
 
 app.get("/artists", async function(req, res) {
